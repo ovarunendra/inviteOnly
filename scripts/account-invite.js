@@ -29,6 +29,8 @@ $(function(){
 	var inviteCodeSI, inviteCodeOB;
 	var $inviteCode, $inviteCodeNext;
 
+	var $backingDiv = $("#backing-div")
+
 	$inviteCodeNext = $("#invite-code-button");
 
 	function initInputs() {
@@ -64,6 +66,12 @@ $(function(){
 				$firstElem.focus().trigger("focus");
 			}, 2000);
 		}
+
+		$backingDiv.animate({
+			opacity : 1
+		}, 500, function(){
+			
+		});
 	}
 
 	function inviteCodeValidator(){
