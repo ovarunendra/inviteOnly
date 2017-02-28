@@ -1,0 +1,178 @@
+
+@font-face {
+    font-family: 'sf_ui_displaybold';
+    src: url('webfonts/sf-ui-display-bold-webfont.woff2') format('woff2'),
+         url('webfonts/sf-ui-display-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'sf_ui_displaylight';
+    src: url('webfonts/sf-ui-display-light-webfont.woff2') format('woff2'),
+         url('webfonts/sf-ui-display-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}@font-face {
+    font-family: 'sf_ui_displayregular';
+    src: url('webfonts/sf-ui-display-regular-webfont.woff2') format('woff2'),
+         url('webfonts/sf-ui-display-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}@font-face {
+    font-family: 'sf_ui_displaysemibold';
+    src: url('webfonts/sf-ui-display-semibold-webfont.woff2') format('woff2'),
+         url('webfonts/sf-ui-display-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+}
+body{
+    margin: 0px;
+    font-size: 2.5vh; 
+    font-family: 'sf_ui_displayregular';
+    
+    /*overflow: hidden;*/
+    color: #111;
+}
+input:focus,
+select:focus,
+textarea:focus{
+    outline: none;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-top: 0px solid transparent;
+}
+* {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    user-select:none;
+}
+
+input, textarea {
+    -webkit-touch-callout:default;
+    -webkit-user-select:text;
+    user-select:text;
+}
+
+/* COMMON ELEMENTS */
+.close-button {
+    position: absolute;
+    top: 4.2vw;
+    left: 5vw;
+    width:4.1vw;
+    height: 4.1vw;
+    background: url("../img/crossDark@3x.png");
+    background-size: contain;
+}
+.section-title {
+    width: 100%;
+    font-size: 6vw;
+    color: rgb (45, 50, 66);
+    text-align: center;
+    font-family: 'sf_ui_displaybold';
+    padding-top: 2.5em;
+    padding-bottom: 0.5em;
+}
+#content-holder {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /*overflow-x: hidden;
+    overflow-y: scroll;*/
+}
+
+#backing-div {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: -moz-linear-gradient(top, #fcfcfc 0%, #f3f3f3 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #fcfcfc 0%,#f3f3f3 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #fcfcfc 0%,#f3f3f3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    position: absolute;
+}
+
+.page-holder {
+    /*background: white;*/
+    width: 56.25vh;
+    height: 100vh;
+    left: calc((100vw - 56.25vh) / 2);
+    position: absolute; 
+}
+/*CUSTOM PLACEHOLDER FOCUS*/
+
+.pc-input {
+    width: 100%;
+    border: 0px;
+    font-family: 'sf_ui_displaylight';
+    margin-top: 0.75em;
+    font-size: 1.0em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border-bottom: 2px solid #ddd;
+    position: relative;
+    background: transparent;
+    border-radius: 0px;
+}
+
+.pc-label {
+    font-size: 1.0em;
+    top: 1.3em;
+    font-family: 'sf_ui_displaysemibold';
+    color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+}
+
+.pc-sub {
+    padding-top: 0.5em;
+    font-size: 0.75em;
+    font-family: 'sf_ui_displaysemibold';
+    color: rgba(0, 0, 0, 0.4);
+    height: 1em;
+}
+
+.pc-input-container {
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+    position: relative;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pc-show-pw-button {
+    position: absolute;
+    right: 10%;
+    top: 40%;
+    font-size: 0.75em;
+    color: #999;
+}
+
+.big-button {
+    width: 80%;
+    margin-left: 10%;
+    border: 0px solid transparent;
+    border-radius: 1vh;
+    /*TEST CHANGE*/
+    /*font-size: 1.0em;*/
+    font-size: 100%;
+    background: rgb(255, 170, 15);
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    font-family: 'sf_ui_displaylight';
+}
+
+.op-0-disp-none {
+    opacity: 0;
+    visibility: hidden;
+}
