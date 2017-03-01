@@ -1,3 +1,5 @@
+var inviteCodeError, requestCodeSuccess;
+
 $(function(){
 	//Possible fix for iOS10+ overriding meta-tags, double-stirred:
 
@@ -26,34 +28,112 @@ $(function(){
 		height : wh + "px"
 	});
 
-	var inviteCodeSI, inviteCodeOB;
-	var $inviteCode, $inviteCodeNext;
-
+	var currentPage;
+	var inviteCodeSI, inviteCodeOB, requestCodeNameSI, requestCodeEmailSI, requestCodeOB;
+	var $inviteCode, $inviteCodeNext, $requestCodeName, $requestCodeEmail, $requestCodeNext;
 	var $backingDiv = $("#backing-div")
 
 	$inviteCodeNext = $("#invite-code-button");
+	$requestCodeNext = $("#request-code-button");
+
+	function validateEmail(email) {
+		// var val = this[0].__ns_input.value;
+		// console.log(this);
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
+	}
+
+	function slideInPage(newPage){
+		if(newPage == currentPage)
+			return;
+		var $page = $("#" + newPage + "-page");
+
+		var css = {
+			display : "inline",
+			visibility : "visible"
+		};
+
+		$page.css(css);
+
+		var totalDelay = 0;
+
+		if(currentPage){
+			var $cPage = $("#" + currentPage + "-page");
+			$cPage.children().each(function(j){
+				var $elem = $(this);
+				$elem.css({
+					opacity : 1,
+				}).stop().delay().animate({
+					opacity : 0
+				}, 600, "easeInOutBack");
+			});
+			totalDelay = $cPage.children.length * 200;
+			$cPage.delay(totalDelay).queue(function(){
+				$cPage.css({
+					visibility : "hidden"
+				});
+			});
+		}
+
+		$page.children().each(function(i){
+			var $elem = $(this);
+			$elem.css({
+				opacity : 0
+			}).stop().delay(totalDelay + i * 150).animate({
+				opacity : 1
+			}, 600, "easeInOutBack");
+		});
+
+		currentPage = newPage;
+	};
 
 	function initInputs() {
 		inviteCodeOB = new OrangeButton($inviteCodeNext, inviteCodeValidator);
+		requestCodeOB = new OrangeButton($requestCodeNext, requestCodeValidator);
 
 		inviteCodeSI = new SuperInput(($inviteCode = $("#invite-code-pc")), {
 			after : checkInviteCodeButton,
 			check :function(val){
-				// if(!checkForAdjacentSpaces(val)){
-				// 	this.html("Nicknames cannot contain adjacent spaces!");
-				// 	return false;
-				// }
 				if(val.length && val.length < 6){
-					this.html("Please Enter 6 digit invite code!");
+					//this.html("Please Enter 6 digit invite code!");
 					return false;
 				}
 				if (val.length === 6) {
-					this.html("");
+					//this.html("");
 					return true;
 				}
-				this.html("");
+				//this.html("");
 				return false;
 			}
+		});
+
+		requestCodeNameSI = new SuperInput(($requestCodeName = $("#request-code-name-pc")), {
+			after : checkRequestCodeButton,
+			check :function(val){
+				if (val.length) {
+					return true;
+				}
+				return false;
+			}
+		});
+
+		requestCodeEmailSI = new SuperInput(($requestCodeEmail = $("#request-code-email-pc")), {
+			after : checkRequestCodeButton,
+			check :function(val){
+				var html = "", isValid = false;
+				if(val.length){
+					isValid = validateEmail(val);
+					//Check is valid
+					if(!isValid)
+						html = "Please enter a valid email address";
+				}
+				this.html(html);
+				return isValid;
+			}
+		});
+
+		$(".request-code").on("mousedown", function(){
+			slideInPage('request-code');
 		});
 	}
 
@@ -70,7 +150,7 @@ $(function(){
 		$backingDiv.animate({
 			opacity : 1
 		}, 500, function(){
-			
+			slideInPage('invite');
 		});
 	}
 
@@ -78,14 +158,108 @@ $(function(){
 		return inviteCodeSI.correct();
 	}
 
+	function requestCodeValidator() {
+		return requestCodeNameSI.correct() && requestCodeEmailSI.correct();
+	}
+
 	function checkInviteCodeButton() {
 		inviteCodeOB.validate();
+	}
+
+	function checkRequestCodeButton() {
+		requestCodeOB.validate();
 	}
 
 	$inviteCodeNext.on("mousedown", function(){
 			var e = inviteCodeSI.value();
 			B.runBlippFunction("proceedInviteCode", [e]);
+			
 		});
+
+	$requestCodeNext.on("mousedown", function(){
+			var name = requestCodeNameSI.value();
+			var email = requestCodeEmailSI.value();
+			B.runBlippFunction("requestInviteCode", [name, email]);
+			
+		});
+
+   inviteCodeError = function () {
+	openDialog("Oh no, something's gone wrong", 
+            "Looks like it's our fault. <br/> Try agian later", 
+			"Try Again",
+            function(){
+
+        });
+   };
+
+   requestCodeSuccess = function () {
+	openDialog("Thanks!", 
+            "", 
+			"Done",
+            function(){
+
+        });
+   };
+
+	var $dText = $("#dialog-text"), 
+		$dTitle = $("#dialog-title"),
+	    $dialogBox = $("#dialog-box"), 
+		$dialogBacking = $("#dialog-backing"),
+		$dialogOK = $("#dialog-ok");
+
+	dialogOut = false;
+
+	var dialogCloseHandler;
+
+	function openDialog(title, message, button, closeHandler){
+
+		if(dialogOut){
+			return;
+		}
+
+		$dTitle.html(title);
+		$dText.html(message);
+		$dialogOK.html(button);
+		dialogCloseHandler = closeHandler;
+
+		$dialogBox.css({
+			left: "0%",
+			opacity : 0,
+			visibility : "visible"
+		}).animate({
+			left : "10%",
+			opacity : 1
+		}, 400, "easeInOutBack");
+		$dialogBacking.css({
+			opacity : 0,
+			visibility : "visible"
+		}).animate({
+			opacity : 0.5
+		}, 400);
+		
+		dialogOut = false;
+
+	};
+
+	$dialogOK.on("mousedown", function(){
+		$dialogBox.animate({
+			left : "20%",
+			opacity : 0
+		}, 400, "easeInOutBack");
+		$dialogBacking.animate({
+			opacity : 0.0
+		}, 400, function(){
+			$dialogBox.css({
+				visibility : "hidden"
+			});
+			$dialogBacking.css({
+				visibility : "hidden"
+			});
+			if(dialogCloseHandler)
+				dialogCloseHandler();
+			dialogCloseHandler = null;
+		});
+	});
 
 	initInputs();
 	animateInStart();

@@ -23,14 +23,41 @@
 		<div class="close-button">
 			
 		</div>
+		<!--||||||||||||||||||||||||||||||||||||||||||| INVITE CODE -->
 		<div id="invite-page" class="page-holder">
 			<div class="section-title">Enter Invite Code</div>
 			<div class="pc-input-container" id="invite-code-pc">
 				<div class="pc-label">Code</div>
 				<input class="pc-input" type="text" id="input-invite-code" maxlength="6">
-				<div class="pc-sub" id="invite-code-sub"></div>
+				<div class="pc-sub request-code" id="invite-code-sub">Request code</div>
 			</div>
 			<div class="big-button op-0-disp-none" id="invite-code-button">Proceed</div>
+		</div>
+
+		<!--||||||||||||||||||||||||||||||||||||||||||| REQUEST CODE -->
+		
+		<div id="request-code-page" class="page-holder">
+			
+			<div class="section-title">Request Code</div>
+			<div class="pc-input-container" id="request-code-name-pc">
+				<div class="pc-label">Name</div>
+				<input class="pc-input" type="text" id="request-code-name" >
+				<div class="pc-sub"></div>
+			</div>
+			<div class="pc-input-container" id="request-code-email-pc">
+				<div class="pc-label">Email</div>
+				<input class="pc-input" type="email" id="request-code-email" >
+				<div class="pc-sub"></div>
+			</div>
+			<button class="big-button op-0-disp-none" id="request-code-button">Request</button>
+		</div>
+
+		<div id="dialog-backing"></div>
+		<div id="dialog-box">
+			<div id="dialog-title"></div>
+			<div id="dialog-text"></div>
+			<button class="big-button" id="dialog-ok"></button>
+			
 		</div>
 	</div>
 
