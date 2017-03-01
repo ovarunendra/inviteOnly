@@ -134,6 +134,14 @@ $(function(){
 
 		$(".request-code").on("mousedown", function(){
 			slideInPage('request-code');
+			var $firstElem;
+			$firstElem = $("#request-code-name");
+
+			if($firstElem){
+				setTimeout(function(){
+					$firstElem.focus().trigger("focus");
+				}, 1000);
+			}
 		});
 	}
 
