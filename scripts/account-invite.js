@@ -1,4 +1,4 @@
-var inviteCodeError, requestCodeSuccess;
+var inviteCodeError, requestCodeSuccess, slideInPage;
 
 $(function(){
 	//Possible fix for iOS10+ overriding meta-tags, double-stirred:
@@ -43,7 +43,7 @@ $(function(){
 	    return re.test(email);
 	}
 
-	function slideInPage(newPage){
+	slideInPage = function (newPage){
 		if(newPage == currentPage)
 			return;
 		var $page = $("#" + newPage + "-page");
