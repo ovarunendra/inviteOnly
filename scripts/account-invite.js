@@ -197,7 +197,7 @@ $(function(){
             "", 
 			"Done",
             function(){
-
+				B.runBlippFunction("close_html", []);
         });
    };
 
