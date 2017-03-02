@@ -56,8 +56,9 @@ $(function(){
 		$page.css(css);
 
 		var totalDelay = 0;
-
+        console.log("OUtside")
 		if(currentPage){
+			console.log("Inside")
 			var $cPage = $("#" + currentPage + "-page");
 			$cPage.children().each(function(j){
 				var $elem = $(this);
