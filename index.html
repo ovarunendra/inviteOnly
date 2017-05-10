@@ -11,11 +11,10 @@
   console.log("test console: ");
 
   function access() {
-        // var iframe = document.getElementById("iframeId");
-        // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-				$( "#iframeId" ).contents().find( ".center-div" ).css( "background-color", "#BADA55" );
-				// var test = document.getElementById('iframeId').contentWindow.document.getElementByClassName('center-div')
-        B.runBlippFunction('callBack', ['called']);
+        setTimeout(function(){
+            $( "#iframeId" ).contents().find( ".center-div" ).css( "background-color", "#BADA55" );
+            B.runBlippFunction('callBack', ['called']);
+        }, 2000);
     }
 </script>
 </body>
