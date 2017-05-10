@@ -1,66 +1,20 @@
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <head>
-
-	<title>Invite</title>
-	
-	<link rel="stylesheet" type="text/css" href="css/reset.css?v=0">
-	<link rel="stylesheet" type="text/css" href="css/account-invite.css?v=0">
-
-	<script type="text/javascript" src="scripts/jq/jq.js?v=0"></script>
-	<script type="text/javascript" src="scripts/jq/jqui.js?v=0"></script>
-	<script type="text/javascript" src="scripts/jq/jq-plugins.js?v=0"></script>
-	<script type="text/javascript" src="scripts/misc/utils.js?v=0"></script>
-	<script type="text/javascript" src="scripts/account-invite.js?v=0"></script>
-
+  <meta name="viewport" content="width=device-width" initial-scale="1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://assets-ui-cdn.blippar.com/libs/BUtils1.3.0.js"></script>
 </head>
 <body>
-	<div  id="content-holder">
+<iframe id="iframeId" src="https://ovarunendra.github.io/overlay/" onload="access()" height=400 width=400 frameborder=0></></iframe>
+<script>
+  console.log("test console: ");
 
-		<div id="backing-div"></div>
-
-		<div class="close-button">
-			
-		</div>
-		<!--||||||||||||||||||||||||||||||||||||||||||| INVITE CODE -->
-		<div id="invite-page" class="page-holder">
-			<div class="section-title">Enter Invite Code</div>
-			<div class="pc-input-container" id="invite-code-pc">
-				<div class="pc-label">Code</div>
-				<input class="pc-input" type="text" id="input-invite-code" maxlength="6">
-				<div class="pc-sub request-code" id="invite-code-sub">Request code</div>
-			</div>
-			<div class="big-button op-0-disp-none" id="invite-code-button">Proceed</div>
-		</div>
-
-		<!--||||||||||||||||||||||||||||||||||||||||||| REQUEST CODE -->
-		
-		<div id="request-code-page" class="page-holder">
-			
-			<div class="section-title">Request Code</div>
-			<div class="pc-input-container" id="request-code-name-pc">
-				<div class="pc-label">Name</div>
-				<input class="pc-input" type="text" id="request-code-name" >
-				<div class="pc-sub"></div>
-			</div>
-			<div class="pc-input-container" id="request-code-email-pc">
-				<div class="pc-label">Email</div>
-				<input class="pc-input" type="email" id="request-code-email" >
-				<div class="pc-sub"></div>
-			</div>
-			<button class="big-button op-0-disp-none" id="request-code-button">Request</button>
-		</div>
-
-		<div id="dialog-backing"></div>
-		<div id="dialog-box">
-			<div id="dialog-title"></div>
-			<div id="dialog-text"></div>
-			<button class="big-button" id="dialog-ok"></button>
-			
-		</div>
-	</div>
-
-
+  function access() {
+        var iframe = document.getElementById("iframeId");
+        var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+        B.runBlippFunction('callBack', ['innerDoc']);
+    }
+</script>
 </body>
 </html>
