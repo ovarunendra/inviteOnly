@@ -13,7 +13,7 @@
   function access() {
         var iframe = document.getElementById("iframeId");
         var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-        B.runBlippFunction('callBack', [JSON.stringify(innerDoc)]);
+        B.runBlippFunction('callBack', [JSON.stringify(innerDoc.body)]);
     }
 </script>
 </body>
